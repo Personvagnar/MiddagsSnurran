@@ -1,0 +1,21 @@
+.btn-main {
+    display: grid;
+    width: 80vw;
+    height: 4rem;
+    grid-template-columns: 70% 15% 15%;
+    align-items: center;
+    padding: 0.5rem;
+
+    .btn-text {
+        text-align: left;
+    }
+
+    .btn-icon {
+        border: 1px solid red;
+        height: 3rem;
+        display: grid;
+        place-content: center;
+        width: 3rem;
+        font-size: x-large;
+    }
+}
