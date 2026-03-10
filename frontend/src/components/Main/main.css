@@ -1,0 +1,6 @@
+main {
+    background-color: pink;
+    height: calc(100vh - 6rem);
+    display: grid;
+    place-content: center;
+}
