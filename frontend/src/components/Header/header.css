@@ -6,4 +6,7 @@ header {
     align-items: center;
     padding: 1rem;
     height: 6rem;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
