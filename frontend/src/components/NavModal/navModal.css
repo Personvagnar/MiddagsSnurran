@@ -1,0 +1,34 @@
+.navmodal {
+    width: 90%;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    .navmodal-list {
+        border: 1px solid red;
+        list-style: none;
+        width: 50%;
+        height: auto;
+        gap: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        li {
+            color: blue;
+            font-size: xx-large;
+        }
+    }
+
+    .closeBtn {
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 1rem;
+    }
+}

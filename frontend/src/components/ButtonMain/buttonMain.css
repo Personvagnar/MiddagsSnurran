@@ -9,13 +9,4 @@
     .btn-text {
         text-align: left;
     }
-
-    .btn-icon {
-        border: 1px solid red;
-        height: 3rem;
-        display: grid;
-        place-content: center;
-        width: 3rem;
-        font-size: x-large;
-    }
 }
