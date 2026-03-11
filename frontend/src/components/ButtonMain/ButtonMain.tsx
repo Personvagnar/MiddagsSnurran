@@ -14,8 +14,8 @@ function ButtonMain({ text, leftIcon, rightIcon, onClick, onLeftIconClick, onRig
   return (
     <button className='btn-main' onClick={onClick}>
         <span className='btn-text'>{text}</span>
-        <span className='btn-icon' onClick={(e) => { e.stopPropagation(); onLeftIconClick?.()}}>{leftIcon}</span>
-        <span className='btn-icon' onClick={(e) => { e.stopPropagation(); onRightIconClick?.()}}>{rightIcon}</span>
+        <span className='squareBtn' onClick={(e) => { e.stopPropagation(); onLeftIconClick?.()}}>{leftIcon}</span>
+        <span className='squareBtn' onClick={(e) => { e.stopPropagation(); onRightIconClick?.()}}>{rightIcon}</span>
     </button>
   )
 }
