@@ -4,3 +4,8 @@
     align-items: center;
     gap: 1rem;
 }
+.menu {
+    margin-top: 12rem;
+    display: grid;
+    grid-template-columns: 1fr;
+}
