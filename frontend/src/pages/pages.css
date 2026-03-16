@@ -8,6 +8,7 @@
     margin-top: 12rem;
     display: grid;
     grid-template-columns: 1fr;
+    gap: 1rem;
 }
 .addBtn {
     position: fixed;
