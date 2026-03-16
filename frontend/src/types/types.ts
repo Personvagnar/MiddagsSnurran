@@ -8,3 +8,5 @@ export interface Item {
     img?: string
     recipe?: string
 }
+
+export type NewItem = Omit<Item, "_id">
