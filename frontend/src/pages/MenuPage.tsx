@@ -5,10 +5,12 @@ import { getItems } from '../api/items';
 import type { Item } from '../types/types';
 import AddEditModal from '../components/AddEditModal/AddEditModal';
 import { FaPlus } from 'react-icons/fa';
+import MenuItem from '../components/MenuItem/MenuItem';
 
 function MenuPage() {
     const [items, setItems] = useState<Item[]>([]);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
 
     useEffect(() => {
         getItems().then(setItems).catch(err => console.error(err))
@@ -21,10 +23,14 @@ function MenuPage() {
                 <p>loading menu...</p>
             ) : (
                 items.map(item => (
+                    <section key={item._id}>
                     <ButtonMain 
-                        key={item._id} 
                         text={item.name} 
-                        onClick={() => {} }/>
+                        onClick={() => setExpandedItemId(prev =>
+                            prev === item._id ? null : item._id
+                        ) }/>
+                    {expandedItemId === item._id && <MenuItem item={item} />}
+                    </section>
                 ))
             )}
         </section>
