@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.5rem;
+    padding: var(--space-05);
     border-left: 1px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
@@ -21,7 +21,7 @@
         width: auto;
         max-height: 6rem;
         overflow: hidden;
-        padding: 0.5rem;
+        padding: var(--space-05);
 
         img {
             width: 100%;
@@ -34,15 +34,14 @@
     article {
         display: flex;
         flex-direction: column;
-        padding: 0.5rem;
+        padding: var(--space-05);
+        background: var(--color-pink);
+        border-radius: 5px;
     }
     }
-    h5, span {
-        padding: 0.5rem;
-    }
-    span {
-        background-color: grey;
-        color: white;
+    h5, a {
+        padding: var(--space-05);
+        font-style: italic;
     }
     .expanded-footer {
         width: 100%;

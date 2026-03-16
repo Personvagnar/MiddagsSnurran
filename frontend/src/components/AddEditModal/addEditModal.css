@@ -16,13 +16,13 @@
     width: 90%;
     height: 80%;
     position: fixed;
-    padding: 1rem;
+    padding: var(--space-1);
     top: 10%;
     left: 5%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    gap: 0.5rem;
+    gap: var(--space-05);
 
     .addedit-item {
         display: flex;
@@ -31,7 +31,7 @@
         border: 1px solid red;
         justify-content: space-around;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-05);
 
         input {
             width: 100%;

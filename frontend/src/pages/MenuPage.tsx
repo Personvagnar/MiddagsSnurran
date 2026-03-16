@@ -18,6 +18,9 @@ function MenuPage() {
 
   return (
     <main>
+        <figure className='main-img'>
+        <img src="/Ellipse 1.png" alt="Main decoartive" />
+      </figure>
         <section className='menu'>
             {items.length === 0 ? (
                 <p>loading menu...</p>

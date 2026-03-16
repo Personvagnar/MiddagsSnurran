@@ -4,7 +4,37 @@
   box-sizing: border-box;
 }
 
-/* Globala variabler*/
+:root {
+  --font-header: "Irish Grover", system-ui;
+  --font-base: "Merriweather Sans", sans-serif;
+
+  --color-background: linear-gradient(to top right, #B5E3EE, rgba(140, 211, 228, 0.6));
+
+  --color-lightblue: #B5E3EE;
+  --color-darkBlue: #8CD3E4;
+  --color-pink: #EEC0B5;
+  --color-black: #212020;
+  --color-grey: #212020;
+  --color-grey50: rgba(33, 32, 32, 0.5);
+  --color-white: #F3EDED;
+
+  --space-1: 1rem;
+  --space-05: 0.5rem;
+}
+
+/*.irish-grover-regular {
+  font-family: "Irish Grover", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.merriweather-sans {
+  font-family: "Merriweather Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+300-800 weight på ovan samt normal-italic*/
 
 main {
   display: grid;
@@ -12,7 +42,18 @@ main {
   height: 100%;
   min-height: 100vh;
   width: 100vw;
-  background-color: rgb(230, 230, 127);
+  background: var(--color-background);
+  z-index: 0;
+}
+.main-img {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  z-index: 0;
+  transform-origin: center;
+  animation: rotate;
+  animation-iteration-count: infinite;
+  animation-duration: 12s;
 }
 
 .squareBtn {
@@ -22,4 +63,29 @@ main {
     display: grid;
     place-content: center;
     font-size: x-large;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-header);
+  font-weight: 400;
+  color: var(--color-black);
+}
+h2 {
+  font-size: x-large;
+  overflow-x: hidden;
+}
+
+p, h4, h5 {
+  font-family: var(--font-base);
+  color: var(--color-black);
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
