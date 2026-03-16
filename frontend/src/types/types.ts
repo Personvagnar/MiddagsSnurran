@@ -1,4 +1,4 @@
-export type Protein = "Köttfärs" | "Kyckling" | "Veg" | "Fisk"
+export type Protein = "Köttfärs" | "Kyckling" | "Veg" | "Fisk" | "Övrigt"
 
 export interface Item {
     _id: string
