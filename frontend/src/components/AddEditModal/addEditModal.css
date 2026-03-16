@@ -1,0 +1,46 @@
+.background-blur {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 128, 0, 0.185);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.addeditmodal {
+    background-color: pink;
+
+    width: 90%;
+    height: 80%;
+    position: fixed;
+    padding: 1rem;
+    top: 10%;
+    left: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 0.5rem;
+
+    .addedit-item {
+        display: flex;
+        width: 100%;
+        height: 6rem;
+        border: 1px solid red;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0.5rem;
+
+        input {
+            width: 100%;
+            height: min-content;
+        }
+
+        button {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}

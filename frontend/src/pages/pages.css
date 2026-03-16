@@ -9,3 +9,16 @@
     display: grid;
     grid-template-columns: 1fr;
 }
+.addBtn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0rem 0.5rem 0.5rem;
+
+    button {
+        width: 6rem;
+        height: 6rem;
+        background-color: green;
+        border: none;
+    }
+}
