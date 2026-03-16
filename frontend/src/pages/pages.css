@@ -17,6 +17,7 @@
     bottom: 0;
     right: 0;
     padding: 0rem 0.5rem 0.5rem;
+    z-index: 1;
 
     button {
         width: 6rem;

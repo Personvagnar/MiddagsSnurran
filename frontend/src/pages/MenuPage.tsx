@@ -10,6 +10,7 @@ import MenuItem from '../components/MenuItem/MenuItem';
 function MenuPage() {
     const [items, setItems] = useState<Item[]>([]);
     const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
+    const [modalOpen, setModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState<"add" | "edit" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
@@ -34,6 +35,7 @@ function MenuPage() {
                             onRightIconClick={expandedItemId === item._id ? () => {
                                 setSelectedItem(item); 
                                 setModalMode("edit");
+                                setModalOpen(true);
                             } : undefined}
                             onClick={() => setExpandedItemId(prev =>
                                 prev === item._id ? null : item._id
@@ -44,13 +46,13 @@ function MenuPage() {
             )}
         </section>
         <aside className="addBtn">
-            <button aria-label='addBtn' onClick={() => {setSelectedItem(null); setModalMode("add");}}>
+            <button aria-label='addBtn' onClick={() => {setSelectedItem(null); setModalMode("add"); setModalOpen(true)}}>
                 <FaPlus size={30} color='blue'/>
             </button>
         </aside>
         {modalMode && (
             <AddEditModal
-                mode='add'
+                mode={modalMode}
                 item={selectedItem ?? undefined}
                 closeModal={() => {
                     setModalMode(null); 
