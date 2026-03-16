@@ -4,7 +4,7 @@
     height: 4rem;
     grid-template-columns: 70% 15% 15%;
     align-items: center;
-    padding: 0.5rem;
+    padding: var(--space-05);
 
     .btn-text {
         text-align: left;

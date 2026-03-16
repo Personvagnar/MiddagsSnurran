@@ -13,7 +13,7 @@ type ButtonMainProps = {
 function ButtonMain({ text, leftIcon, rightIcon, onClick, onLeftIconClick, onRightIconClick}: ButtonMainProps) {
   return (
     <button className='btn-main' onClick={onClick}>
-        <span className='btn-text'>{text}</span>
+        <h2 className='btn-text'>{text}</h2>
         <span className='squareBtn' onClick={(e) => { e.stopPropagation(); onLeftIconClick?.()}}>{leftIcon}</span>
         <span className='squareBtn' onClick={(e) => { e.stopPropagation(); onRightIconClick?.()}}>{rightIcon}</span>
     </button>

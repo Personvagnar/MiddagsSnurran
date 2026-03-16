@@ -14,11 +14,11 @@ function MenuItem({item}: Props) {
           </figure>
           <article>
               <p>Protein:</p>
-            <span>{item.protein}</span>
+            <h5>{item.protein}</h5>
               {item.desc && (
                 <>
                 <p>Beskrivning:</p>
-            <span>{item.desc}</span>
+            <h5>{item.desc}</h5>
                 </>
               )}
           </article>
@@ -27,7 +27,7 @@ function MenuItem({item}: Props) {
         {item.recipe && (
           <>
             <p>Recept:</p>
-            <span>{item.recipe}</span>
+            <a target='_blank'>{item.recipe}</a>
           </>
         )}
         </section>
