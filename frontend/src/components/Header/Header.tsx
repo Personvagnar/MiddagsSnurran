@@ -9,7 +9,7 @@ function Header() {
   return (
     <header>
         <h1>MiddagsSnurran</h1>
-        <button aria-label='navModal' type='button' className='squareBtn' onClick={() => setNavOpen(true)}>
+        <button aria-label='navModal' type='button' className='squareBtn header-nav' onClick={() => setNavOpen(true)}>
           <FaBars/>
         </button>
         <NavModal open={navOpen} onClose={() => setNavOpen(false)} /> 

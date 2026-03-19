@@ -70,8 +70,8 @@ function AddEditModal({ closeModal, mode, item }: Props) {
         {error && <p className="form-error">{error}</p>}
         
         <section className="addedit-item">
-            {mode != "add" ? <button aria-label='deleteBtn' type='button' className='squareBtn' onClick={() => {setShowConfirm(true)}}><FaTrash/></button> : undefined}
-            {mode != "add" ? <button aria-label='editBtn' type='submit' className='squareBtn'><FaEdit/></button> : <button aria-label='addBtn' type='submit' className='squareBtn'><FaCheck/></button>}
+            {mode != "add" ? <button aria-label='deleteBtn' type='button' className='squareBtn circleBtn circleBtn-red' onClick={() => {setShowConfirm(true)}}><FaTrash/></button> : undefined}
+            {mode != "add" ? <button aria-label='editBtn' type='submit' className='squareBtn circleBtn circleBtn-green'><FaEdit/></button> : <button aria-label='addBtn' type='submit' className='squareBtn circleBtn circleBtn-green'><FaCheck/></button>}
         </section>
         {showConfirm && (
             <ConfirmationModal

@@ -16,7 +16,7 @@ function NavModal({open, onClose}: Props) {
             <li>andra</li>
             <li>tredje</li>
         </ul>
-        <button aria-label="closeModal" type="button" className="squareBtn closeBtn" onClick={onClose}><FaTimes/></button>
+        <button aria-label="closeModal" type="button" className="squareBtn closeBtn header-nav" onClick={onClose}><FaTimes/></button>
     </section>
   )
 }
