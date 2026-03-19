@@ -1,11 +1,12 @@
 import ButtonMain from '../components/ButtonMain/ButtonMain';
 import './pages.css';
 import { useEffect, useState } from 'react';
-import { getItems } from '../api/items';
+import { getItems } from '../api/api';
 import type { Item } from '../types/types';
 import AddEditModal from '../components/AddEditModal/AddEditModal';
 import { FaPencilAlt, FaPlus } from 'react-icons/fa';
 import MenuItem from '../components/MenuItem/MenuItem';
+import ConfirmationModal from '../components/ConfirmationModal/ConfirmationModal';
 
 function MenuPage() {
     const [items, setItems] = useState<Item[]>([]);
