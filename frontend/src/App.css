@@ -80,6 +80,19 @@ p, h4, h5 {
   color: var(--color-black);
 }
 
+.background-blur {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 128, 0, 0.185);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
 
 @keyframes rotate {
   0% {

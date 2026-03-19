@@ -18,3 +18,13 @@ export async function addItem(item: NewItem): Promise<Item> {
 
     return res.json();
 }
+
+export async function deleteItem(id: string): Promise<void> {
+    const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+    });
+
+    if (!res.ok) {
+        throw new Error('Kunde inte ta bort item');
+    }
+}

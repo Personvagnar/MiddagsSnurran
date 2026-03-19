@@ -1,6 +1,10 @@
 import type { Item, Protein} from '../../types/types';
 import './addEditModal.css';
 import { useAddEditForm } from '../../hooks/useAddEditForm';
+import { FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
+import { useItems } from '../../hooks/addItem';
+import { useState } from 'react';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 type Props = {
     closeModal: () => void;
@@ -10,7 +14,18 @@ type Props = {
 
 const proteinOptions: Protein[] = ["Köttfärs", "Kyckling", "Veg", "Fisk", "Övrigt"]
 
+
 function AddEditModal({ closeModal, mode, item }: Props) {
+    const [showConfirm, setShowConfirm] = useState(false);
+    const { removeItem } = useItems();
+
+    const handleDelete = async () => {
+        if (!item?._id) return;
+        await removeItem(item._id);
+        setShowConfirm(false);
+        closeModal();
+    }
+
   const {
     name, setName,
     protein, setProtein,
@@ -24,7 +39,10 @@ function AddEditModal({ closeModal, mode, item }: Props) {
   return (
     <section className="background-blur">
     <form className="addeditmodal" onSubmit={handleSubmit}>
-        <h2>{mode === 'add' ? "Lägg till:" : "Redigera"}</h2>
+        <section className="title">
+            <h2>{mode === 'add' ? "Lägg till:" : "Redigera"}</h2>
+            <button aria-label='closeBtn' type='button' className='squareBtn' onClick={closeModal}><FaTimes/></button>
+        </section>
        {mode === 'edit' ? <figure> <img src={item?.img ?? ''} alt={item?.img ?? ''}/> </figure> : null}
         <section className="addedit-item">
             <h3>Namn:</h3>
@@ -53,9 +71,16 @@ function AddEditModal({ closeModal, mode, item }: Props) {
         {error && <p className="form-error">{error}</p>}
         
         <section className="addedit-item">
-            <button type='button' onClick={closeModal}>kryss</button>
-            <button type='submit'>Spara</button>
+            <button aria-label='deleteBtn' type='button' className='squareBtn' onClick={() => {setShowConfirm(true)}}><FaTrash/></button>
+            <button aria-label='editBtn' type='submit' className='squareBtn'><FaEdit/></button>
         </section>
+        {showConfirm && (
+            <ConfirmationModal
+                text={'Ta bort?'}
+                onCancel={() => setShowConfirm(false)}
+                onConfirm={handleDelete}
+            />
+        )}
     </form>
     </section>
   )
