@@ -1,6 +1,6 @@
 import type { Item, NewItem } from "../types/types";
 
-const API_URL = 'http://localhost:5000/api/items'
+const API_URL = 'https://middagssnurran.onrender.com/api/items'
 
 export async function getItems(): Promise<Item[]> {
     const res = await fetch(API_URL)
