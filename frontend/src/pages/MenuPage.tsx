@@ -50,7 +50,7 @@ function MenuPage() {
                 <FaPlus size={30}/>
             </button>
         </aside>
-        {modalMode && (
+        {modalMode && modalOpen && (
             <AddEditModal
                 mode={modalMode}
                 item={selectedItem ?? undefined}

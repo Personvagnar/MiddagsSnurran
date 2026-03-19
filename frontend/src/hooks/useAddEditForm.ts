@@ -28,7 +28,6 @@ export function useAddEditForm({ item, mode, onClose }: Props) {
       protein: protein as Protein,
       desc: desc.trim(),
       recipe: recipe.trim(),
-      img: item?.img
     };
 
     try {
