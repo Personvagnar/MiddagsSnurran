@@ -47,7 +47,7 @@ function MenuPage() {
         </section>
         <aside className="addBtn">
             <button aria-label='addBtn' onClick={() => {setSelectedItem(null); setModalMode("add"); setModalOpen(true)}}>
-                <FaPlus size={30} color='blue'/>
+                <FaPlus size={30}/>
             </button>
         </aside>
         {modalMode && (

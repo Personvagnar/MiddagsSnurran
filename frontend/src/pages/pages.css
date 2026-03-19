@@ -14,15 +14,17 @@
 }
 .addBtn {
     position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 0rem 0.5rem 0.5rem;
+    bottom: var(--space-05);
+    right: var(--space-05);
     z-index: 1;
 
     button {
         width: 6rem;
         height: 6rem;
-        background-color: green;
+        background-color: var(--color-pink);
+        border-radius: var(--borderRad-big);
+        box-shadow: var(--boxShadow-general);
         border: none;
+        color: var(--color-black);
     }
 }

@@ -13,8 +13,8 @@ function ConfirmationModal({text, onConfirm, onCancel}: Props) {
         <section className="modal">
             <h2>{text}</h2>
             <aside>
-                <button aria-label='cancelBtn' className='squareBtn' onClick={onCancel}><FaTimes/></button>
-                <button aria-label='confirmBtn' className='squareBtn' onClick={onConfirm}><FaCheck/></button>
+                <button aria-label='cancelBtn' className='squareBtn circleBtn circleBtn-red' onClick={onCancel}><FaTimes/></button>
+                <button aria-label='confirmBtn' className='squareBtn circleBtn circleBtn-green' onClick={onConfirm}><FaCheck/></button>
             </aside>
         </section>
     </section>

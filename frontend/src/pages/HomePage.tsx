@@ -13,7 +13,7 @@ function HomePage() {
       </figure>
         <section className='homepage'>
             <ButtonMain text='Slumparen' onClick={() => {console.log('main')}} rightIcon={<FaRandom />}/>
-            <ButtonMain text='Meny' onClick={() => navigate('/menu')} rightIcon={<FaPencilAlt />}/>
+            <ButtonMain text='Meny' onClick={() => navigate('/menu')} rightIcon={<FaPencilAlt />} onRightIconClick={() => navigate('/menu')}/>
             <ButtonMain text='VeckoPlaneraren' onClick={() => {}} rightIcon={<FaCalendarAlt />} />
         </section>
       

@@ -13,13 +13,20 @@
   --color-lightblue: #B5E3EE;
   --color-darkBlue: #8CD3E4;
   --color-pink: #EEC0B5;
-  --color-black: #212020;
+  --color-black: #0c0c0c;
   --color-grey: #212020;
   --color-grey50: rgba(33, 32, 32, 0.5);
   --color-white: #F3EDED;
+  --color-green: #6DEB6D;
+  --color-red: #FF6B6B;
 
   --space-1: 1rem;
   --space-05: 0.5rem;
+
+  --borderRad-main: 5px;
+  --borderRad-big: 10px;
+
+  --boxShadow-general: 0px 0px 20px 1px var(--color-grey50);
 }
 
 /*.irish-grover-regular {
@@ -44,6 +51,7 @@ main {
   width: 100vw;
   background: var(--color-background);
   z-index: 0;
+  padding-bottom: 8rem;
 }
 .main-img {
   position: fixed;
@@ -57,13 +65,25 @@ main {
 }
 
 .squareBtn {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     height: 3rem;
     width: 3rem;
     display: grid;
     place-content: center;
     font-size: x-large;
+    background: transparent;
+    border: none;
 }
+.circleBtn {
+  border-radius: 50%;
+}
+.circleBtn-green {
+  background: var(--color-green);
+}
+.circleBtn-red {
+  background: var(--color-red);
+}
+
 
 h1, h2, h3 {
   font-family: var(--font-header);
