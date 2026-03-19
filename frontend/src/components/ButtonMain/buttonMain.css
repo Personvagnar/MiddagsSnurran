@@ -8,5 +8,10 @@
 
     .btn-text {
         text-align: left;
+        display: inline-block;
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

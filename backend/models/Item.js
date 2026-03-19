@@ -8,7 +8,6 @@ const itemSchema = new mongoose.Schema({
         required: true,
     },
     desc: String,
-    img: String,
     recipe: String,
 }, {timestamps: true});
 

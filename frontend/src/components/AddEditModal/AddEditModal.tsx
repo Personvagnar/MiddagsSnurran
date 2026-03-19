@@ -43,7 +43,6 @@ function AddEditModal({ closeModal, mode, item }: Props) {
             <h2>{mode === 'add' ? "Lägg till:" : "Redigera"}</h2>
             <button aria-label='closeBtn' type='button' className='squareBtn' onClick={closeModal}><FaTimes/></button>
         </section>
-       {mode === 'edit' ? <figure> <img src={item?.img ?? ''} alt={item?.img ?? ''}/> </figure> : null}
         <section className="addedit-item">
             <h3>Namn:</h3>
             <input aria-label='name' value={name} onChange={(e) => setName(e.target.value)} required/>
