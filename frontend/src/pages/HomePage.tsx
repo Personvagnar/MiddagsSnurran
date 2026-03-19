@@ -8,11 +8,11 @@ function HomePage() {
 
   return (
     <main>
-      <figure className='main-img'>
+      <figure className='main-img main-img-rotate'>
         <img src="/Ellipse 1.png" alt="Main decoartive" />
       </figure>
         <section className='homepage'>
-            <ButtonMain text='Slumparen' onClick={() => {console.log('main')}} rightIcon={<FaRandom />}/>
+            <ButtonMain text='Slumparen' onClick={() => navigate('/slumparen')} rightIcon={<FaRandom />}/>
             <ButtonMain text='Meny' onClick={() => navigate('/menu')} rightIcon={<FaPencilAlt />} onRightIconClick={() => navigate('/menu')}/>
             <ButtonMain text='VeckoPlaneraren' onClick={() => {}} rightIcon={<FaCalendarAlt />} />
         </section>

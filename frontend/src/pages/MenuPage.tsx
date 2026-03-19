@@ -20,7 +20,7 @@ function MenuPage() {
 
   return (
     <main>
-        <figure className='main-img'>
+        <figure className='main-img main-img-rotate'>
         <img src="/Ellipse 1.png" alt="Main decoartive" />
       </figure>
         <section className='menu'>
