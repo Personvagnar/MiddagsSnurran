@@ -15,12 +15,6 @@ app.use(cors({
     allowedHeaders: ["Content-Type"]
 }));
 
-app.options("*", cors({
-    origin: "*",
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    allowedHeaders: ["Content-Type"]
-}));
-
 app.use(express.json());
 
 app.use('/api/items', itemsRouter);
