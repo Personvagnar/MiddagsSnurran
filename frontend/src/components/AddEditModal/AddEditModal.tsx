@@ -1,7 +1,7 @@
 import type { Item, Protein} from '../../types/types';
 import './addEditModal.css';
 import { useAddEditForm } from '../../hooks/useAddEditForm';
-import { FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
+import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
 import { useItems } from '../../hooks/addItem';
 import { useState } from 'react';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
@@ -70,8 +70,8 @@ function AddEditModal({ closeModal, mode, item }: Props) {
         {error && <p className="form-error">{error}</p>}
         
         <section className="addedit-item">
-            <button aria-label='deleteBtn' type='button' className='squareBtn' onClick={() => {setShowConfirm(true)}}><FaTrash/></button>
-            <button aria-label='editBtn' type='submit' className='squareBtn'><FaEdit/></button>
+            {mode != "add" ? <button aria-label='deleteBtn' type='button' className='squareBtn' onClick={() => {setShowConfirm(true)}}><FaTrash/></button> : undefined}
+            {mode != "add" ? <button aria-label='editBtn' type='submit' className='squareBtn'><FaEdit/></button> : <button aria-label='addBtn' type='submit' className='squareBtn'><FaCheck/></button>}
         </section>
         {showConfirm && (
             <ConfirmationModal
