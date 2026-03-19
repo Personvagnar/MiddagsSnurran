@@ -79,6 +79,15 @@ p, h4, h5 {
   font-family: var(--font-base);
   color: var(--color-black);
 }
+a {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: underline;
+    color: var(--color-black);
+}
 
 .background-blur {
     width: 100vw;
