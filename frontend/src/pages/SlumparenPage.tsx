@@ -30,7 +30,7 @@ function SlumparenPage() {
                 <>
                 <section className='slumparen-content'>
                 <ButtonMain text={randomItem.name} onClick={() => {}} rightIcon={<FaCalendarAlt/>} />
-                <MenuItem item={randomItem}/>
+                <MenuItem item={randomItem} isOpen={true}/>
                 </section>
                 <footer>
                 <ButtonMain text='Slumpa igen' rightIcon={<FaRandom />} onClick={randomize}/>
