@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function useAddEditForm({ item, mode, onClose }: Props) {
-  const { createItem } = useItems();
+  const { createItem, editItem } = useItems();
 
   const [name, setName] = useState(item?.name ?? "");
   const [protein, setProtein] = useState<Protein | "">(item?.protein ?? "");
@@ -18,7 +18,7 @@ export function useAddEditForm({ item, mode, onClose }: Props) {
   const [error, setError] = useState("");
 
   const handleSubmit = async () => {
-    if (!name.trim() || !protein || !desc.trim() || !recipe.trim()) {
+    if (!name.trim() || !protein || !desc.trim()) {
       setError("Alla fält måste fyllas i");
       return;
     }
@@ -34,10 +34,12 @@ export function useAddEditForm({ item, mode, onClose }: Props) {
       if (mode === "add") {
         await createItem(formItem);
       }
+      if (mode === "edit" && item?._id) {
+        await editItem(item._id, formItem);
+      }
 
-      // TODO: edit mode (PUT) kan läggas här senare
       onClose();
-      window.location.reload(); // kan bytas ut mot state update
+      window.location.reload();
     } catch {
       setError("Kunde inte spara item");
     }
