@@ -64,7 +64,7 @@ function AddEditModal({ closeModal, mode, item }: Props) {
         </section>
         <section className="addedit-item">
             <h3>Recept:</h3>
-            <input aria-label='recipeurl' value={recipe} onChange={(e) => setRecipe(e.target.value)} required/>
+            <input aria-label='recipeurl' value={recipe} onChange={(e) => setRecipe(e.target.value)}/>
         </section>
 
         {error && <p className="form-error">{error}</p>}

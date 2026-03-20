@@ -3,11 +3,13 @@ import type { Item } from '../../types/types';
 
 type Props = {
   item: Item;
+  isOpen: boolean;
 }
 
-function MenuItem({item}: Props) {
+function MenuItem({item, isOpen}: Props) {
+
   return (
-    <section className="item-expanded">
+    <section className={isOpen ? "item-expanded open" : "item-expanded"}>
         <section className="expanded-main">
             <p>Protein:</p>
             <h5>{item.protein}</h5>
@@ -19,7 +21,7 @@ function MenuItem({item}: Props) {
               )}
         </section>
         <section className="expanded-footer">
-        {item.recipe && (
+        {item.recipe?.trim() && (
           <>
             <p>Recept:</p>
             <a href={item.recipe} target='_blank' rel='noopener noreferrer'>{item.recipe}</a>

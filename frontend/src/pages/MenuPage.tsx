@@ -40,7 +40,7 @@ function MenuPage() {
                             onClick={() => setExpandedItemId(prev =>
                                 prev === item._id ? null : item._id
                             ) }/>
-                        {expandedItemId === item._id && <MenuItem item={item} />}
+                        {expandedItemId === item._id && <MenuItem item={item} isOpen={true} />}
                     </section>
                 ))
             )}
