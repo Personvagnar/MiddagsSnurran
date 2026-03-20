@@ -6,7 +6,10 @@
     height: 20%;
 
     display: flex;
-    background: grey;
+    background: var(--color-grey);
+    border-radius: var(--borderRad-big);
+    border: 1px solid var(--color-red);
+    box-shadow: var(--boxShadow-general);
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -15,6 +18,7 @@
     h2 {
         width: 100%;
         text-align: center;
+        color: var(--color-white);
     }
     aside {
         display: flex;

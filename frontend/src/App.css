@@ -22,6 +22,7 @@
 
   --space-1: 1rem;
   --space-05: 0.5rem;
+  --space-02: 0.2rem;
 
   --borderRad-main: 5px;
   --borderRad-big: 10px;
@@ -51,7 +52,6 @@ main {
   width: 100vw;
   background: var(--color-background);
   z-index: 0;
-  padding-bottom: 8rem;
 }
 .main-img {
   position: fixed;
