@@ -33,7 +33,6 @@ router.get("/:date", async (req, res) => {
   try {
     const entry = await Calendar.findOne({ date: req.params.date })
       .populate("itemId");
-
     res.json(entry);
   } catch (err) {
     res.status(500).json({ error: err.message });

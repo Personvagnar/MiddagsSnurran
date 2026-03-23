@@ -9,3 +9,11 @@ export interface Item {
 }
 
 export type NewItem = Omit<Item, "_id">
+
+export interface CalendarEntry {
+    _id: string
+    date: string
+    itemId: Item;
+}
+
+export type NewCalendarEntry = Omit<CalendarEntry, "_id">
