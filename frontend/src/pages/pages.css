@@ -11,7 +11,15 @@
     grid-template-columns: 1fr;
     gap: var(--space-1);
     z-index: 1;
-
+}
+.calendar {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    top: 10%;
+    position: absolute;
 }
 .addBtn {
     position: fixed;

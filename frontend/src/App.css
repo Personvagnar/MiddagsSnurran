@@ -47,7 +47,7 @@
 main {
   display: grid;
   place-content: center;
-  height: 100%;
+  height: auto;
   min-height: 100vh;
   width: 100vw;
   background: var(--color-background);
@@ -76,15 +76,15 @@ footer {
     border-top: 1px solid var(--color-black);
     box-shadow: var(--boxShadow-general);
     width: 100vw;
-    display: grid;
-    place-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: var(--space-1);
     height: 20vh;
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 10;
-
 }
 
 .squareBtn {
@@ -121,7 +121,7 @@ p {
   font-size: 0.8rem;
 }
 
-p, h4, h5 {
+p, h4, h5, .fc {
   font-family: var(--font-base);
   color: var(--color-black);
 }
