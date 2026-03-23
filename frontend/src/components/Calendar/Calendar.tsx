@@ -2,37 +2,37 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import type { EventInput } from '@fullcalendar/core';
-import { useState } from 'react';
 import './calendar.css';
-import ButtonMain from '../ButtonMain/ButtonMain';
-import MenuItem from '../MenuItem/MenuItem';
 
 type Props = {
-    onClick?: (dateStr: string) => void;
+    events: EventInput[];
+    onDateClick: (dateStr: string) => void;
+    onEventClick: (dateStr: string) => void;
 }
 
-function Calendar({ onClick }: Props) {
-    const [events, setEvents] = useState<EventInput[]>([]);
-    const [selectedDate, setSelectedDate] = useState<string | null>(null);
+function Calendar({ events, onDateClick }: Props) {
     
     const handleDateClick = (arg: any) => {
-        setSelectedDate(arg.dateStr);
-
-        if (onClick) onClick(arg.dateStr);
-
-        /*const title = prompt('Vilken maträtt vill du lägga till?');
-        if (title) {
-            setEvents([...events, {title, start:arg.dateStr, allDay: true}]);
-        }*/
+        onDateClick(arg.dateStr);
+        console.log(arg.dateStr);
     }
+    const handleEventClick = (info: any) => {
+  const date = info.event.start;
+  if (!date) return;
+
+  // Use local date string
+  const dateStr = date.toLocaleDateString("sv-SE"); // "YYYY-MM-DD" format
+  onDateClick(dateStr);
+  console.log("Event clicked:", dateStr);
+};
 
   return (
-    <>
     <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView='dayGridMonth'
         selectable={true}
         dateClick={handleDateClick}
+        eventClick={handleEventClick}
         events={events}
         headerToolbar={{
             left: 'prev,next today',
@@ -43,19 +43,6 @@ function Calendar({ onClick }: Props) {
         dayCellClassNames="calendar-day"    
         
         />
-
-        {selectedDate && (
-            <footer>
-                <section className="calendar-footer">
-                    <article>
-                        <h4>{selectedDate}</h4>
-                        <p>{selectedDate}</p>
-                    </article>
-                    <ButtonMain text='mat' onClick={() => {}}/>
-                </section>
-            </footer>
-        )}
-        </>
   )
 }
 
