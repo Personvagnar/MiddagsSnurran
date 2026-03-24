@@ -18,8 +18,6 @@ export async function addItem(item: NewItem): Promise<Item> {
         },
         body: JSON.stringify(item),
     });
-    console.log(res);
-
     return res.json();
 }
 

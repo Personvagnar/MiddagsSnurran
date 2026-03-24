@@ -1,4 +1,4 @@
-import type { Item, Protein} from '../../types/types';
+import { PROTEIN_OPTIONS, type Item, type Protein} from '../../types/types';
 import './addEditModal.css';
 import { useAddEditForm } from '../../hooks/useAddEditForm';
 import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
@@ -12,7 +12,7 @@ type Props = {
     item?: Item;
 };
 
-const proteinOptions: Protein[] = ["Köttfärs", "Kyckling", "Veg", "Fisk", "Övrigt"]
+const proteinOptions = PROTEIN_OPTIONS;
 
 
 function AddEditModal({ closeModal, mode, item }: Props) {
