@@ -17,7 +17,9 @@ export function useAddEditForm({ item, mode, onClose }: Props) {
   const [recipe, setRecipe] = useState(item?.recipe ?? "");
   const [error, setError] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!name.trim() || !protein || !desc.trim()) {
       setError("Alla fält måste fyllas i");
       return;
@@ -37,9 +39,7 @@ export function useAddEditForm({ item, mode, onClose }: Props) {
       if (mode === "edit" && item?._id) {
         await editItem(item._id, formItem);
       }
-
       onClose();
-      window.location.reload();
     } catch {
       setError("Kunde inte spara item");
     }

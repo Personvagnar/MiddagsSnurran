@@ -1,4 +1,5 @@
-export type Protein = "Köttfärs" | "Kyckling" | "Veg" | "Fisk" | "Övrigt"
+export const PROTEIN_OPTIONS = ["Köttfärs", "Kyckling", "Kött", "Fläsk", "Veg", "Fisk", "Övrigt"] as const;
+export type Protein = typeof PROTEIN_OPTIONS[number];
 
 export interface Item {
     _id: string

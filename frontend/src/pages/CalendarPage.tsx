@@ -8,15 +8,19 @@ import ConfirmationModal from '../components/ConfirmationModal/ConfirmationModal
 import AddEditDateModal from '../components/AddEditDateModal/AddEditDateModal';
 import { useDates } from '../hooks/useDates';
 import { getWeekdaySv } from '../utils/dateUtils';
+import { useLocation } from 'react-router-dom';
 
 function CalendarPage() {
+  const location = useLocation();
+  const incomingItem = location.state?.selectedItem;
+
   const [currentMonth] = useCurrentMonth();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [confirmModal, setConfirmModal] = useState(false);
   const [dateModal, setDateModal] = useState(false);
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-  const {monthEntries, selectedItem, fetchMonth, fetchSelectedDate, removeDate} = useDates(currentMonth);
+  const {monthEntries, selectedItem, fetchMonth, saveDate, fetchSelectedDate, removeDate} = useDates(currentMonth);
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -31,6 +35,22 @@ function CalendarPage() {
   useEffect(() => {
     fetchMonth();
   }, [currentMonth]);
+
+  useEffect(() => {
+    if (!incomingItem) return;
+
+    const today = new Date().toISOString().split('T')[0];
+    async function handleAdd() {
+      const existing = await fetchSelectedDate(today);
+      if (existing) {
+        await saveDate(today, incomingItem._id, "edit", existing._id);
+      } else {
+        await saveDate(today, incomingItem._id, "add");
+      }
+      setSelectedDate(today);
+    }
+    handleAdd();
+  }, [incomingItem]);
  
   return (
     <main>
@@ -58,6 +78,12 @@ function CalendarPage() {
                     break;
                   case "Övrigt":
                     proteinClass = "other";
+                    break;
+                  case "Fläsk":
+                    proteinClass = "pork";
+                    break;
+                  case "Kött":
+                    proteinClass = "meat";
                     break;
                 }
 

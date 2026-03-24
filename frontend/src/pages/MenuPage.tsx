@@ -4,19 +4,36 @@ import { useEffect, useState } from 'react';
 import { getItems } from '../api/api';
 import type { Item } from '../types/types';
 import AddEditModal from '../components/AddEditModal/AddEditModal';
-import { FaPencilAlt, FaPlus } from 'react-icons/fa';
+import { FaCalendarAlt, FaPencilAlt, FaPlus } from 'react-icons/fa';
 import MenuItem from '../components/MenuItem/MenuItem';
+import { useNavigate } from 'react-router-dom';
+import ConfirmationModal from '../components/ConfirmationModal/ConfirmationModal';
 
 function MenuPage() {
+    const navigate = useNavigate();
     const [items, setItems] = useState<Item[]>([]);
     const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState<"add" | "edit" | null>(null);
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const [confirmModal, setConfirmModal] = useState(false);
 
     useEffect(() => {
-        getItems().then(setItems).catch(err => console.error(err))
-    }, [])
+        fetchItems();
+    }, []);
+
+    const fetchItems = () => {
+        getItems()
+        .then(setItems)
+        .catch(err => console.error(err));
+        };
+
+    function handleCalendarClick() {
+        if (!selectedItem) return;
+        setConfirmModal(false);
+        navigate('/calendar', {state: { selectedItem }});
+        fetchItems();
+    }
 
   return (
     <main>
@@ -37,6 +54,11 @@ function MenuPage() {
                                 setModalMode("edit");
                                 setModalOpen(true);
                             } : undefined}
+                            leftIcon={expandedItemId === item._id ? <FaCalendarAlt /> : undefined}
+                            onLeftIconClick={expandedItemId === item._id ? () => {
+                                setSelectedItem(item);
+                                setConfirmModal(true);
+                            } : undefined}
                             onClick={() => setExpandedItemId(prev =>
                                 prev === item._id ? null : item._id
                             ) }/>
@@ -46,10 +68,13 @@ function MenuPage() {
             )}
         </section>
         <aside className="addBtn">
-            <button aria-label='addBtn' onClick={() => {setSelectedItem(null); setModalMode("add"); setModalOpen(true)}}>
+            <button aria-label='addBtn' type='button' onClick={() => {setSelectedItem(null); setModalMode("add"); setModalOpen(true)}}>
                 <FaPlus size={30}/>
             </button>
         </aside>
+        {confirmModal && (
+            <ConfirmationModal text='Lägg till i dagens datum?' onCancel={() => setConfirmModal(false)} onConfirm={handleCalendarClick}/>
+        )}
         {modalMode && modalOpen && (
             <AddEditModal
                 mode={modalMode}
@@ -57,6 +82,7 @@ function MenuPage() {
                 closeModal={() => {
                     setModalMode(null); 
                     setSelectedItem(null);
+                    fetchItems();
                 }} />
         )}
     </main>

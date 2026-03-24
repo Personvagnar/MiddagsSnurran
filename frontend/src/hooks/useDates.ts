@@ -19,13 +19,15 @@ export function useDates(currentMonth: string) {
     fetchMonth();
   }, [fetchMonth]);
 
-  const fetchSelectedDate = useCallback(async (date: string) => {
+  const fetchSelectedDate = useCallback(async (date: string): Promise<CalendarEntry | null> => {
     try {
       const entry = await getCalendarByDate(date);
       setSelectedItem(entry);
+      return entry;
     } catch (err) {
       console.error("Failed to fetch selected date", err);
       setSelectedItem(null);
+      return null;
     }
   }, []);
 

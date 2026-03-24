@@ -1,5 +1,6 @@
 import './menuItem.css';
 import type { Item } from '../../types/types';
+import { isValidUrl } from '../../utils/validateRecipe';
 
 type Props = {
   item: Item;
@@ -21,7 +22,7 @@ function MenuItem({item, isOpen}: Props) {
               )}
         </section>
         <section className="expanded-footer">
-        {item.recipe?.trim() && (
+        {item.recipe?.trim() && isValidUrl(item.recipe) && (
           <>
             <p>Recept:</p>
             <a href={item.recipe} target='_blank' rel='noopener noreferrer'>{item.recipe}</a>
