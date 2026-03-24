@@ -90,6 +90,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).json(updated);
   } catch (err) {
     res.status(500).json({ error: err.message });
+    console.log(itemId)
   }
 });
 

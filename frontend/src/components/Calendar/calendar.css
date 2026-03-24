@@ -35,3 +35,19 @@
 .fc .fc-event:hover {
   opacity: 0.8;
 }
+
+.fc .mincedmeat {
+  background-color: aqua;
+}
+.fc .chicken {
+  background-color: purple;
+}
+.fc .fish {
+  background-color: rgb(30, 255, 41);
+}
+.fc .veg {
+  background-color: rgb(8, 0, 116);
+}
+.fc .other {
+  background-color: rgb(255, 13, 13);
+}

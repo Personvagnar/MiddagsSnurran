@@ -1,77 +1,36 @@
 import './pages.css';
 import Calendar from '../components/Calendar/Calendar';
 import {useState, useEffect} from 'react';
-import type { CalendarEntry } from '../types/types';
-import { deleteCalendarEntry, getCalendarByDate, getCalendarByMonth } from '../api/api';
 import { useCurrentMonth } from '../utils/getMonth';
 import ButtonMain from '../components/ButtonMain/ButtonMain';
 import { FaPencilAlt, FaPlus, FaTimes } from 'react-icons/fa';
 import ConfirmationModal from '../components/ConfirmationModal/ConfirmationModal';
 import AddEditDateModal from '../components/AddEditDateModal/AddEditDateModal';
+import { useDates } from '../hooks/useDates';
+import { getWeekdaySv } from '../utils/dateUtils';
 
 function CalendarPage() {
-  const [monthEntries, setMonthEntries] = useState<CalendarEntry[]>([]);
-  const [currentMonth, setCurrentMonth] = useCurrentMonth();
+  const [currentMonth] = useCurrentMonth();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedItem, setSelectedItem] = useState<CalendarEntry | null>(null);
   const [confirmModal, setConfirmModal] = useState(false);
   const [dateModal, setDateModal] = useState(false);
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-  async function handleDeleteConfirm() {
-    if (!selectedDate) return;
-
-    try {
-      await deleteCalendarEntry(selectedDate);
-
-      setMonthEntries(prev => prev.filter(entry => entry.date !== selectedDate));
-
-      setSelectedDate(null);
-      setSelectedItem(null);
-      setConfirmModal(false);
-    } catch(err) {
-      console.error('Failed to delete')
-      setConfirmModal(false);
-    }
-  }
-
-  function handleDeleteCancel() {
-    setConfirmModal(false);
-  }
-
-  function handleDateModal() {
-    setDateModal(false);
-  }
-
-  useEffect(() => {
-    async function fetchMonth() {
-      try {
-        const entries = await getCalendarByMonth(currentMonth);
-        setMonthEntries(entries);
-      } catch(err) {
-        console.error('Failed to fetch calendar', err)
-      }
-    }
-    fetchMonth();
-  }, [currentMonth]);
+  const {monthEntries, selectedItem, fetchMonth, fetchSelectedDate, removeDate} = useDates(currentMonth);
 
   useEffect(() => {
     if (!selectedDate) return;
+    fetchSelectedDate(selectedDate);
+  }, [selectedDate, fetchSelectedDate]);
 
-    async function fetchSelectedDate() {
-      try {
-        const entry = await getCalendarByDate(selectedDate!);
-        setSelectedItem(entry);
-      } catch (err) {
-        console.error(err);
-        setSelectedItem(null);
-      }
-    }
-    fetchSelectedDate();
-  }, [selectedDate]);
-
-  function handleAddClick() {
+  function handleAddClick(mode: 'add' | 'edit') {
+    setModalMode(mode);
     setDateModal(true)
   }
+
+  useEffect(() => {
+    fetchMonth();
+  }, [currentMonth]);
  
   return (
     <main>
@@ -79,15 +38,35 @@ function CalendarPage() {
             <Calendar
               events={(monthEntries ?? []).map(e => {
                 let title = "Rätt";
+                let proteinClass = '';
                 if (e.itemId) {
                   title = typeof e.itemId === "string" ? "Rätt" : e.itemId.name;
+                }
+
+                switch (e.itemId.protein) {
+                  case "Köttfärs":
+                    proteinClass = "mincedmeat";
+                    break;
+                  case "Kyckling":
+                    proteinClass = "chicken";
+                    break;
+                  case "Fisk":
+                    proteinClass = "fish";
+                    break;
+                  case "Veg":
+                    proteinClass = "veg";
+                    break;
+                  case "Övrigt":
+                    proteinClass = "other";
+                    break;
                 }
 
                 return {
                   id: e._id,
                   title,
                   start: e.date,
-                  allDay: true
+                  allDay: true,
+                  classNames: [proteinClass]
                 };
               })}
               onDateClick={setSelectedDate}
@@ -98,16 +77,16 @@ function CalendarPage() {
           <footer>
             <section className="calendar-footer">
             <article>
-              <h4>Måndag</h4>
+              <h4>{getWeekdaySv(selectedDate)}</h4>
               <p>{selectedDate}</p>
             </article>
             <ButtonMain 
               text={selectedItem ? selectedItem.itemId.name : 'Lägg till'} 
-              onClick={selectedItem ? handleAddClick : handleAddClick}
+              onClick={() => handleAddClick(selectedItem ? 'edit' : 'add')}
               leftIcon={selectedItem ? <FaTimes/> : undefined}
               onLeftIconClick={selectedItem ? () => setConfirmModal(true) : undefined}
               rightIcon={selectedItem ? <FaPencilAlt/> : <FaPlus size={24}/>}
-              onRightIconClick={selectedItem ? handleAddClick : handleAddClick}
+              onRightIconClick={() => handleAddClick(selectedItem ? 'edit' : 'add')}
               />
           </section>
           </footer>
@@ -115,12 +94,17 @@ function CalendarPage() {
         {confirmModal && selectedItem && (
           <ConfirmationModal
             text={`Ta bort ${selectedItem.itemId.name} från ${selectedDate}?`}
-            onConfirm={handleDeleteConfirm}
-            onCancel={handleDeleteCancel}
+            onConfirm={async () => { if(selectedDate) await removeDate(selectedDate); setConfirmModal(false); await fetchMonth(); setSelectedDate(null)}}
+            onCancel={() => {setConfirmModal(false); setSelectedDate(null);}}
           />
         )}
         {dateModal && selectedDate && (
-          <AddEditDateModal closeModal={handleDateModal} mode='add' date={selectedDate!}/>
+          <AddEditDateModal 
+            closeModal={async (updated?: boolean) => {setDateModal(false); if(updated) await fetchMonth(); setSelectedDate(null)}} 
+            mode={modalMode} 
+            date={selectedDate} 
+            entryId={selectedItem?._id}
+            />
         )}
     </main>
 )}

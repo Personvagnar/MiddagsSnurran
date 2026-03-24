@@ -16,15 +16,14 @@ function Calendar({ events, onDateClick }: Props) {
         onDateClick(arg.dateStr);
         console.log(arg.dateStr);
     }
-    const handleEventClick = (info: any) => {
-  const date = info.event.start;
-  if (!date) return;
 
-  // Use local date string
-  const dateStr = date.toLocaleDateString("sv-SE"); // "YYYY-MM-DD" format
-  onDateClick(dateStr);
-  console.log("Event clicked:", dateStr);
-};
+    const handleEventClick = (info: any) => {
+        const date = info.event.start;
+        if (!date) return;
+
+        const dateStr = date.toLocaleDateString("sv-SE");
+    onDateClick(dateStr);
+    };
 
   return (
     <FullCalendar
