@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import './addEditDateModal.css';
 import type { Item } from '../../types/types';
-import { getItems, postCalendarEntry } from '../../api/api';
-import { FaTimes } from 'react-icons/fa';
+import { getItems, postCalendarEntry, putCalendarEntry } from '../../api/api';
+import { FaCheck, FaTimes } from 'react-icons/fa';
+import '../AddEditModal/addEditModal.css';
 
 type Props = {
-    closeModal: () => void;
+    closeModal: (updated?: boolean) => void;
     mode: "add" | "edit"
     date: string;
+    entryId?: string;
 };
 
-function AddEditDateModal({ closeModal, mode, date}: Props) {
+function AddEditDateModal({ closeModal, mode, date, entryId}: Props) {
     const [items, setItems] = useState<Item[]>([]);
     const [selectedItemId, setSelectedItemId] = useState<string>('');
     const [loading, setLoading] = useState(false);
@@ -33,8 +35,13 @@ function AddEditDateModal({ closeModal, mode, date}: Props) {
     setLoading(true);
 
     try {
-        const res = await postCalendarEntry(date, selectedItemId);
-        closeModal();
+      if (mode === 'add') {
+        await postCalendarEntry(date, selectedItemId);
+      } else if (mode === 'edit' && entryId) {
+        await putCalendarEntry(entryId, selectedItemId);
+      }
+
+      closeModal(true);
     } catch (err) {
       console.error('Failed to add entry', err);
     } finally {
@@ -44,31 +51,32 @@ function AddEditDateModal({ closeModal, mode, date}: Props) {
 
   return (
     <section className="background-blur">
-        <section className="dateModal">
+        <section className="addeditmodal">
             <section className="title">
-                <h2>{mode === 'add' ? "Lägg till:" : "Redigera"}</h2>
-                <button aria-label='closeBtn' type='button' className='squareBtn' onClick={closeModal}><FaTimes/></button>
+                <h2>{mode === 'add' ? "Lägg till:" : "Ändra"}</h2>
+                <button aria-label='closeBtn' type='button' className='squareBtn' onClick={() => closeModal(false)}><FaTimes/></button>
             </section>
 
-        <label htmlFor="itemSelect">Välj maträtt:</label>
-        <select
-          id="itemSelect"
-          value={selectedItemId}
-          onChange={e => setSelectedItemId(e.target.value)}
-        >
-          {items.map(item => (
-            <option key={item._id} value={item._id}>
-              {item.name} ({item.protein})
-            </option>
-          ))}
-        </select>
+        <section className='addedit-item'>
+          <select
+              title='select'
+              id="itemSelect"
+              value={selectedItemId}
+              onChange={e => setSelectedItemId(e.target.value)}
+            >
+            {items.map(item => (
+              <option key={item._id} value={item._id}>
+                {item.name} ({item.protein})
+              </option>
+            ))}
+          </select>
+        </section>
 
-        <div className="modal-buttons">
-          <button onClick={closeModal} disabled={loading}>Avbryt</button>
-          <button onClick={handleConfirm} disabled={loading}>
-            Lägg till
+        <section className="addedit-item">
+          <button aria-label='confirmBtn' type='button' className='squareBtn circleBtn circleBtn-green' onClick={handleConfirm} disabled={loading}>
+            <FaCheck/>
           </button>
-        </div>
+        </section>
 
         </section>
     </section>
