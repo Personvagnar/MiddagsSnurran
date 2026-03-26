@@ -1,9 +1,9 @@
 import type { Item, NewItem } from "../types/types";
 
-//const ITEMS_URL = 'https://middagssnurran.onrender.com/api/items'
-//const CALENDAR_URL = 'https://middagssnurran.onrender.com/api/calendar'
-const ITEMS_URL = 'http://localhost:5000/api/items'
-const CALENDAR_URL = 'http://localhost:5000/api/calendar'
+const ITEMS_URL = 'https://middagssnurran.onrender.com/api/items'
+const CALENDAR_URL = 'https://middagssnurran.onrender.com/api/calendar'
+//const ITEMS_URL = 'http://localhost:5000/api/items'
+//const CALENDAR_URL = 'http://localhost:5000/api/calendar'
 
 export async function getItems(): Promise<Item[]> {
     const res = await fetch(ITEMS_URL)
