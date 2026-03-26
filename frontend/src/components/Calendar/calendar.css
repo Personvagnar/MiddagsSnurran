@@ -5,6 +5,7 @@
   background-color: var(--color-white);
   border-radius: var(--borderRad-big);
   box-shadow: var(--boxShadow-general);
+  font-size: 0.7rem;
 }
 
 /* Dagceller (month view) */

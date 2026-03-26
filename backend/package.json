@@ -18,7 +18,11 @@
     "express": "^5.2.1",
     "mongoose": "^9.2.4"
   },
+  "compilerOptions": {
+    "types": ["node"]
+  },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "nodemon": "^3.1.14"
   }
 }

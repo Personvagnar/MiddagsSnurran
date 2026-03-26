@@ -1,7 +1,6 @@
 import './pages.css';
 import Calendar from '../components/Calendar/Calendar';
 import {useState, useEffect} from 'react';
-import { useCurrentMonth } from '../utils/getMonth';
 import ButtonMain from '../components/ButtonMain/ButtonMain';
 import { FaPencilAlt, FaPlus, FaTimes } from 'react-icons/fa';
 import ConfirmationModal from '../components/ConfirmationModal/ConfirmationModal';
@@ -14,13 +13,13 @@ function CalendarPage() {
   const location = useLocation();
   const incomingItem = location.state?.selectedItem;
 
-  const [currentMonth] = useCurrentMonth();
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const today = new Date().toISOString().split('T')[0];
+  const [selectedDate, setSelectedDate] = useState<string | null>(today);
   const [confirmModal, setConfirmModal] = useState(false);
   const [dateModal, setDateModal] = useState(false);
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-  const {monthEntries, selectedItem, fetchMonth, saveDate, fetchSelectedDate, removeDate} = useDates(currentMonth);
+  const {monthEntries, selectedItem,fetchAll, saveDate, fetchSelectedDate, removeDate} = useDates();
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -33,8 +32,8 @@ function CalendarPage() {
   }
 
   useEffect(() => {
-    fetchMonth();
-  }, [currentMonth]);
+    fetchAll();
+  }, []);
 
   useEffect(() => {
     if (!incomingItem) return;
@@ -120,13 +119,13 @@ function CalendarPage() {
         {confirmModal && selectedItem && (
           <ConfirmationModal
             text={`Ta bort ${selectedItem.itemId.name} från ${selectedDate}?`}
-            onConfirm={async () => { if(selectedDate) await removeDate(selectedDate); setConfirmModal(false); await fetchMonth(); setSelectedDate(null)}}
+            onConfirm={async () => { if(selectedDate) await removeDate(selectedDate); setConfirmModal(false); await fetchAll(); setSelectedDate(null)}}
             onCancel={() => {setConfirmModal(false); setSelectedDate(null);}}
           />
         )}
         {dateModal && selectedDate && (
           <AddEditDateModal 
-            closeModal={async (updated?: boolean) => {setDateModal(false); if(updated) await fetchMonth(); setSelectedDate(null)}} 
+            closeModal={async (updated?: boolean) => {setDateModal(false); if(updated) await fetchAll(); setSelectedDate(null)}} 
             mode={modalMode} 
             date={selectedDate} 
             entryId={selectedItem?._id}
