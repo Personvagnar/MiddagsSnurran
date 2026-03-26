@@ -1,23 +1,19 @@
-import { useState, useCallback, useEffect } from "react";
-import { getCalendarByMonth, getCalendarByDate, postCalendarEntry, putCalendarEntry, deleteCalendarEntry } from "../api/api";
+import { useState, useCallback } from "react";
+import { getCalendarByDate, postCalendarEntry, putCalendarEntry, deleteCalendarEntry, getCalendarAll } from "../api/api";
 import type { CalendarEntry } from "../types/types";
 
-export function useDates(currentMonth: string) {
+export function useDates() {
   const [monthEntries, setMonthEntries] = useState<CalendarEntry[]>([]);
   const [selectedItem, setSelectedItem] = useState<CalendarEntry | null>(null);
 
-  const fetchMonth = useCallback(async () => {
-    try {
-      const entries = await getCalendarByMonth(currentMonth);
-      setMonthEntries(entries);
-    } catch (err) {
-      console.error("Failed to fetch month", err);
-    }
-  }, [currentMonth]);
-
-  useEffect(() => {
-    fetchMonth();
-  }, [fetchMonth]);
+  const fetchAll = useCallback(async () => {
+  try {
+    const entries = await getCalendarAll();
+    setMonthEntries(entries);
+  } catch (err) {
+    console.error("Failed to fetch calendar", err);
+  }
+}, []);
 
   const fetchSelectedDate = useCallback(async (date: string): Promise<CalendarEntry | null> => {
     try {
@@ -37,12 +33,12 @@ export function useDates(currentMonth: string) {
     } else if (mode === "edit" && entryId) {
       await putCalendarEntry(entryId, itemId);
     }
-    await fetchMonth();
+    await fetchAll();
   };
 
   const removeDate = async (date: string) => {
     await deleteCalendarEntry(date);
-    setMonthEntries(prev => prev.filter(entry => entry.date !== date));
+    await fetchAll();
     setSelectedItem(null);
   };
 
@@ -50,9 +46,9 @@ export function useDates(currentMonth: string) {
     monthEntries,
     selectedItem,
     setSelectedItem,
-    fetchMonth,
     fetchSelectedDate,
     saveDate,
-    removeDate
+    removeDate,
+    fetchAll
   };
 }
