@@ -59,7 +59,7 @@ function AddEditModal({ closeModal, mode, item }: Props) {
             </select>
         </section>
         <section className="addedit-item">
-            <h3>Övrigt:</h3>
+            <h3>Beskrivning:</h3>
             <input aria-label='description' value={desc} onChange={(e) => setDesc(e.target.value)} required/>
         </section>
         <section className="addedit-item">
