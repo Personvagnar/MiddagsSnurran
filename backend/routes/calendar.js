@@ -1,5 +1,6 @@
 import express from "express";
 import Calendar from "../models/Calendar.js";
+import { error } from "node:console";
 
 const router = express.Router();
 
@@ -28,37 +29,21 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get('/all', async (req, res) => {
+  try {
+    const entries = await Calendar.find({}).populate('itemId');
+    res.json(entries);
+  } catch(err) {
+    res.status(500).json({ error: err.message});
+  }
+});
+
 //get by date
 router.get("/:date", async (req, res) => {
   try {
     const entry = await Calendar.findOne({ date: req.params.date })
       .populate("itemId");
     res.json(entry);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-//GET all dates monthly 
-router.get("/month/:yearMonth", async (req, res) => {
-  try {
-    const { yearMonth } = req.params; // "YYYY-MM"
-
-    // Validate format
-    if (!/^\d{4}-\d{2}$/.test(yearMonth)) {
-      return res.status(400).json({ error: "yearMonth must be in YYYY-MM format" });
-    }
-
-    // Build start/end dates
-    const startDate = `${yearMonth}-01`;
-    const endDate = `${yearMonth}-31`; // simple approach, works for query
-
-    // Fetch all entries in this month
-    const entries = await Calendar.find({
-      date: { $gte: startDate, $lte: endDate }
-    }).populate("itemId");
-
-    res.json(entries);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -54,12 +54,9 @@ export async function getCalendarByDate(date: string) {
   return data;
 }
 
-export async function getCalendarByMonth(yearMonth: string) {
-  const res = await fetch(`${CALENDAR_URL}/month/${yearMonth}`);
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch months');
-  }
+export async function getCalendarAll() {
+  const res = await fetch(`${CALENDAR_URL}/all`);
+  if (!res.ok) throw new Error("Failed to fetch calendar entries");
   const data = await res.json();
   return Array.isArray(data) ? data : [];
 }

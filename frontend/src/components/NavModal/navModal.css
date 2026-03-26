@@ -2,27 +2,43 @@
     width: 90%;
     height: 100vh;
     position: fixed;
-    right: 0;
+    right: -100%;
     top: 0;
-    background-color: grey;
+    background-color: var(--color-white);
+    box-shadow: var(--boxShadow-general);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 999;
+    animation: revealNav 0.3s ease-in-out forwards;
     
 
     .navmodal-list {
-        border: 1px solid red;
         list-style: none;
-        width: 50%;
+        width: 80%;
         height: auto;
         gap: 2rem;
         display: flex;
         flex-direction: column;
 
         li {
-            color: blue;
-            font-size: xx-large;
+            font-size: x-large;
+            position: relative;
+
+            a {
+                text-decoration: none;
+                display: inline-block;
+            }
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 1px;
+            background-color: var(--color-pink);
+            width: 100%;
+        }
         }
     }
 
@@ -31,5 +47,14 @@
         top: var(--space-05);
         right: var(--space-05);
         margin: var(--space-1);
+    }
+}
+
+@keyframes revealNav {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 0;
     }
 }
