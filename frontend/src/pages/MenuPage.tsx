@@ -38,7 +38,7 @@ function MenuPage() {
   return (
     <main>
         <figure className='main-img main-img-rotate'>
-        <img src="/Ellipse 1.png" alt="Main decoartive" />
+            <img src="/Ellipse 1.png" alt="Main decoartive" />
       </figure>
         <section className='menu'>
             {items.length === 0 ? (
