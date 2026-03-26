@@ -121,7 +121,7 @@ p {
   font-size: 0.8rem;
 }
 
-p, h4, h5, .fc {
+p, h4, h5, .fc .fc-button .fc-event {
   font-family: var(--font-base);
   color: var(--color-black);
 }
