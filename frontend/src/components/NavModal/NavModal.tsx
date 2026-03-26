@@ -13,8 +13,9 @@ function NavModal({open, onClose}: Props) {
     <section className="navmodal">
         <ul className="navmodal-list">
             <li><Link to="/" onClick={onClose}>Hem</Link></li>
-            <li>andra</li>
-            <li>tredje</li>
+            <li><Link to="/slumparen" onClick={onClose}>Slumparen</Link></li>
+            <li><Link to="/menu" onClick={onClose}>Meny</Link></li>
+            <li><Link to="/calendar" onClick={onClose}>VeckoPlaneraren</Link></li>
         </ul>
         <button aria-label="closeModal" type="button" className="squareBtn closeBtn header-nav" onClick={onClose}><FaTimes/></button>
     </section>
