@@ -19,7 +19,7 @@ function CalendarPage() {
   const [dateModal, setDateModal] = useState(false);
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
 
-  const {monthEntries, selectedItem,fetchAll, saveDate, fetchSelectedDate, removeDate} = useDates();
+  const {monthEntries, selectedItem, fetchAll, saveDate, fetchSelectedDate, removeDate} = useDates();
 
   useEffect(() => {
     if (!selectedDate) return;
