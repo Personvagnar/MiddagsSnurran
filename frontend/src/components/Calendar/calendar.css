@@ -27,12 +27,13 @@
 
 .fc .fc-button {
   color: var(--color-black);
+  font-weight: 700;
   background: var(--color-pink);
+  border: none;
 }
 
-/* Event */
 .fc .fc-event {
-  background-color: var(--color-pink); /* default färg */
+  background-color: var(--color-pink);
   border-radius: var(--borderRad-main);
   padding: var(--space-02);
   text-align: center;

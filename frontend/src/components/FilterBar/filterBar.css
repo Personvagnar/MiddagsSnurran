@@ -1,0 +1,17 @@
+.filter-bar {
+    width: 50%;
+    background: var(--color-grey);
+    border-radius: var(--borderRad-main);
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        color: var(--color-pink);
+    }
+    .active {
+        color: var(--color-darkBlue);
+        border: 2px solid var(--color-lightblue);
+        border-radius: var(--borderRad-main);
+    }
+}
