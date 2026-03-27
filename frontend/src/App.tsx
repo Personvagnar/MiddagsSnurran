@@ -5,6 +5,7 @@ import MenuPage from './pages/MenuPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SlumparenPage from './pages/SlumparenPage'
 import CalendarPage from './pages/CalendarPage'
+import StatisticPage from './pages/StatisticPage'
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/menu' element={<MenuPage/>}/>
         <Route path='/slumparen' element={<SlumparenPage/>}/>
         <Route path='/calendar' element={<CalendarPage />}/>
+        <Route path='/statistik' element={<StatisticPage />}/>
       </Routes>
     </BrowserRouter>
   )
