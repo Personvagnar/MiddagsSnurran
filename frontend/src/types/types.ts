@@ -18,3 +18,5 @@ export interface CalendarEntry {
 }
 
 export type NewCalendarEntry = Omit<CalendarEntry, "_id">
+
+export type SortType = "az" | "za" | "protein";

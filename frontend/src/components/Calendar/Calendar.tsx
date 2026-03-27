@@ -42,10 +42,10 @@ function Calendar({ events, onDateClick }: Props) {
         datesSet={(arg) => setCurrentView(arg.view.type)}
         dayHeaderFormat={{ day: 'numeric'}}
         headerToolbar={{
-            left: currentView === 'dayGridMonth'
-            ? 'prev,next,dayGridWeek'
-            : 'prev,next,dayGridMonth',
-            center: '',
+            left: 'prev,next',
+            center: currentView === 'dayGridMonth' 
+            ? 'dayGridWeek' 
+            : 'dayGridMonth',
             right: 'title'
         }}
         eventClassNames="calendar-event"
