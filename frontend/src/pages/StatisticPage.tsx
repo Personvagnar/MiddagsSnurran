@@ -60,7 +60,7 @@ function StatisticPage() {
                 fill="#8884d8"
                 label
               >
-                {stats.map((entry, index) => (
+                {stats.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
