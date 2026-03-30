@@ -8,6 +8,7 @@ import AddEditDateModal from '../components/AddEditDateModal/AddEditDateModal';
 import { useDates } from '../hooks/useDates';
 import { getWeekdaySv } from '../utils/dateUtils';
 import { useLocation } from 'react-router-dom';
+import { PROTEIN_COLORS } from '../types/types';
 
 function CalendarPage() {
   const location = useLocation();
@@ -56,44 +57,23 @@ function CalendarPage() {
         <section className="calendar">
             <Calendar
               events={(monthEntries ?? []).map(e => {
-                let title = "Rätt";
-                let proteinClass = '';
-                if (e.itemId) {
-                  title = typeof e.itemId === "string" ? "Rätt" : e.itemId.name;
-                }
+  const title = e.itemId && typeof e.itemId !== "string" ? e.itemId.name : "Rätt";
+  const proteinClass = e.itemId && typeof e.itemId !== "string"
+    ? PROTEIN_COLORS[e.itemId.protein]
+    : "";
+  const proteinColor = e.itemId && typeof e.itemId !== "string"
+    ? PROTEIN_COLORS[e.itemId.protein]
+    : undefined;
 
-                switch (e.itemId.protein) {
-                  case "Köttfärs":
-                    proteinClass = "mincedmeat";
-                    break;
-                  case "Kyckling":
-                    proteinClass = "chicken";
-                    break;
-                  case "Fisk":
-                    proteinClass = "fish";
-                    break;
-                  case "Veg":
-                    proteinClass = "veg";
-                    break;
-                  case "Övrigt":
-                    proteinClass = "other";
-                    break;
-                  case "Fläsk":
-                    proteinClass = "pork";
-                    break;
-                  case "Kött":
-                    proteinClass = "meat";
-                    break;
-                }
-
-                return {
-                  id: e._id,
-                  title,
-                  start: e.date,
-                  allDay: true,
-                  classNames: [proteinClass]
-                };
-              })}
+      return {
+        id: e._id,
+        title,
+        start: e.date,
+        allDay: true,
+        classNames: [proteinClass],
+        backgroundColor: proteinColor,
+      };
+    })}
               onDateClick={setSelectedDate}
               onEventClick={setSelectedDate}
             />
