@@ -89,23 +89,28 @@ function MenuPage() {
             <img src="/Ellipse 1.png" alt="Main decoartive" />
       </figure>
         <section className='menu'>
-            <FilterBar
-                currentSort={sortType}
-                onSortAZ={() => setSortType("az")}
-                onSortZA={() => setSortType("za")}
-                onSortProtein={() => setSortType("protein")}
-            />
             {items.length === 0 ? (
-                <p>loading menu...</p>
-            ) : sortType === "protein" ? (
-                Object.entries(grouped).map(([protein, groupItems]) => (
-                    <section key={protein}>
-                        <h3 className='group-title'>{protein}</h3>
-                        {groupItems.map(renderedItem)}
-                    </section>
-                ))
+                <p className='loading'>loading menu...</p>
             ) : (
-                sortedItems.map(renderedItem)
+                <>
+                    <FilterBar
+                        currentSort={sortType}
+                        onSortAZ={() => setSortType("az")}
+                        onSortZA={() => setSortType("za")}
+                        onSortProtein={() => setSortType("protein")}
+                    />
+
+                    {sortType === "protein" ? (
+                        Object.entries(grouped).map(([protein, groupItems]) => (
+                            <section key={protein}>
+                                <h3 className='group-title'>{protein}</h3>
+                                {groupItems.map(renderedItem)}
+                            </section>
+                        ))
+                    ) : (
+                        sortedItems.map(renderedItem)
+                    )}
+                </>
             )}
         </section>
         <aside className="addBtn">
