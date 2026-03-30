@@ -1,8 +1,20 @@
 import express from "express";
 import Calendar from "../models/Calendar.js";
-import { error } from "node:console";
+import { deleteOldEntries } from "../cron/deleteOldCalendar.js";
 
 const router = express.Router();
+
+let lastCleanup = 0;
+
+async function cleanup() {
+  const now = Date.now();
+  // max en gång per dag
+  if (now - lastCleanup < 1000 * 60 * 60 * 24) return;
+  lastCleanup = now;
+
+  const result = await deleteOldEntries();
+  console.log(`Automatic cleanup done, deleted ${result.deletedCount} entries`);
+}
 
 router.post("/", async (req, res) => {
   try {
@@ -31,6 +43,7 @@ router.post("/", async (req, res) => {
 
 router.get('/all', async (req, res) => {
   try {
+    await cleanup();
     const entries = await Calendar.find({}).populate('itemId');
     res.json(entries);
   } catch(err) {
